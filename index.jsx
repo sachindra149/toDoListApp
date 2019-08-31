@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import logger from 'redux-logger';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import toDoAppReducer from './reducers/index.jsx';
 
-import store from './store.js';
-import ToDoAppComponents from './components/index.js';
+const store = createStore(toDoAppReducer, applyMiddleware(logger));
+
+import ToDoAppComponents from './components/index.jsx';
+import './styles/css.scss';
 
 class ToDoApp extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h1 className="text-center pb-5 py-5">App</h1>
 				<ToDoAppComponents />
 			</div>
 		)

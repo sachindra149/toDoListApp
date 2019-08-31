@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,700');
+
+$white: #ffffff;
+$black: #000000;
+$mainFont: 'Noto Serif', serif;
+$borderColor: #dddddd;
+$buttonBorder: rgba(0,0,0,0.35);
+$buttonBgHover: rgba(0, 0, 0, 0.05);
+$listBg: rgba(0,0,0,0.075);
+$listBorder: rgba(0,0,0,0.05);
+
+$removeHoverColor: #dc071b;
+$completedHoverColor: #078245;
+$statusBarCompletedColor: rgb(2, 108, 223);
+
+.transition {
+	transition: all 0.25s ease-out 0s;
+}
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+html, body {
+	height: 100%;
+	font-family: $mainFont;
+	color: $black;
+	font-size: 12px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+}
+#app {
+	height: 100%;
+}
+.container {
+	width: 90%;
+	margin: 25px auto;
+	max-width: 1200px;
+}
+.fullWidth {
+	float: left;
+	width: 100%;
+}
+a {
+	color: $black;
+	transition: all 0.25s ease-out 0s;
+	text-decoration: none;
+	&:hover, &:focus {
+		text-decoration: none;
+	}
+}
+.searchBox {
+	border-bottom: 1px solid $borderColor;
+	margin: 35px 0px;
+	position: relative;
+	input[type="text"] {
+		border: 0px;
+		outline: none;
+		padding: 15px 0px;
+		font-size: 1.25em;
+		font-family: $mainFont;
+		width: calc( 100% - 35px );
+	}
+	button {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		background: none;
+		border: 1px solid $buttonBorder;
+		cursor: pointer;
+		@extend .transition;
+		position: absolute;
+		right: 0px;
+		top: 10px;
+		outline: none;
+		&:hover, &:focus {
+			background: $buttonBgHover;
+		}
+		span {
+			&:after, &:before {
+				content: "";
+				width: 15px;
+				height: 1px;
+				position: absolute;
+				top: 50%;
+				left: 7px;
+				background: $buttonBorder;
+			}
+			&:after {
+				transform: rotate(90deg);
+			}
+		}
+	}
+}
+.customWidth {
+	float: right;
+	width: 48%;
+
+	&.pullLeft {
+		float: left;
+	}
+	@media only screen and (max-width: 767px) {
+		width: 100%;
+	}
+}
+.statusBar {
+	float: left;
+	width: 100%;
+	border-radius: 15px;
+	background: $listBg;
+	border: 1px solid $listBorder;
+	margin-bottom: 15px;
+	position: relative;
+	overflow: hidden;
+	line-height: 20px;
+	color: #06c0fd;
+	span {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		background: $statusBarCompletedColor;
+		width: 10%;
+		height: 100%;
+		border-radius: 15px;
+		transition: width 0.35s ease-out 0s;
+		z-index: -1;
+	}
+}
+h3 {
+	margin: 30px 0px 10px 0px;
+	text-indent: 5px;
+}
+ul {
+	background: $listBorder;
+	border-radius: 4px;
+	overflow: hidden;
+	border: 1px solid $listBorder;
+	li {
+		position: relative;
+		list-style: none;
+		padding: 0px 15px;
+		border-bottom: 1px solid $listBg;
+		transition: all 0.25s ease-out 0s;
+		line-height: 45px;
+		&:last-child {
+			border: 0px;
+		}
+		&:hover {
+			background: $listBorder;
+		}
+		a {
+			position: absolute;
+			padding: 0px 10px;
+			&.removeItem {
+				right: 0px;
+				&:hover {
+					color: $removeHoverColor;
+				}
+			}
+			&.markItemComplete {
+				right: 20px;
+				&:hover {
+					color: $completedHoverColor;
+				}
+			}
+		}
+	}
+}
+.textCenter {
+	text-align: center;
+}

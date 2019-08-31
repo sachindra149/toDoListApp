@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 	template: './index.html',
 	filename: 'index.html',
@@ -6,14 +8,15 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 
 module.exports = {
-	entry: './index.js',
+	entry: './index.jsx',
 	output: {
 		filename: 'bundle.js'
 	},
+	mode: 'production',
 	module: {
 		rules: [
    		{
-      		test: /\.js$/,
+      		test: /\.js|\.jsx$/,
    			exclude: /(node_modules)/,
    			use: {
       			loader: 'babel-loader',
@@ -21,8 +24,30 @@ module.exports = {
 						presets: ['env', 'react']
 					}
       		}
-   		}
+   		},{
+			test: /(\.scss|\.sass)$/,
+			use: [
+				{
+					loader: 'style-loader'
+				},
+				{
+					loader: 'css-loader',
+					options: {
+						importLoaders: 2,
+						sourceMap: true,
+						localsConvention: 'camelCase',
+						onlyLocals: false
+					}
+				},
+				{
+					loader: 'sass-loader',
+					options: {
+						sourceMap: true
+					}
+				}
+			]
+		}
 		]
 	},
-	plugins: [HtmlWebpackPluginConfig]
+	plugins: [HtmlWebpackPluginConfig, new CompressionPlugin()]
 }
